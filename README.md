@@ -22,3 +22,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+this is demo to explain what is the class, why is need to use class and how to use class.
+author: Pythonista Wang
+B站：二十多岁的老王
