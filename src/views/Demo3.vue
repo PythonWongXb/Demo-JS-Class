@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img alt="Vue logo" src="../assets/logo.png" />
   </div>
 </template>
 
@@ -27,72 +27,143 @@ import { Options, Vue } from 'vue-class-component'
 // 目的：我的朋友有一群鸟儿，1. 我们想知道这些鸟飞的多快速，2. 他们的羽毛是什么颜色？
 
 interface Bird {
-  name: string,
+  name: string
   type: number
 }
 
-function plumage (bird: Bird) {
-  let res
+function plumage(bird: Bird) {
+  return new BridClass(bird).plumage
+}
+
+function airSpeedVelocity(bird: Bird) {
+  return new BridClass(bird).airSpeedVelocity
+}
+
+function plumages(birds: Bird[]) {
+  return new Map(birds
+                .map(bird => createBird(bird))
+                .map(birdObject => [birdObject.name, birdObject.plumage])
+  )
+}
+
+function speeds(birds: Bird[]) {
+  return new Map(birds
+                .map(bird => createBird(bird))
+                .map(birdObject => [birdObject.name, birdObject.airSpeedVelocity])
+  )
+}
+
+// 有两个不同的操作，其行为都随着鸟的类型而发生变化，
+// 因此可以创建出对应的类，用多态来处理各类型特有的行为
+// 针对每个鸟创建一个子类，用一个工厂函数来十实例化合适的子类对象
+
+function createBird(bird: Bird) {
   if (bird.type === 1) {
-    res = bird.name
+    return new DaYanClass(bird)
   } else if (bird.type === 2) {
-    res = bird.name
+    return new JiaQiaoClass(bird)
   } else if (bird.type === 3) {
-    res = bird.name
+    return new YanZiClass(bird)
   } else {
-    res = '不确定动物'
+    return new BridClass(bird)
   }
-  return res + '的羽毛'
 }
 
-function airSpeedVelocity (bird: Bird) {
-  let res
-  if (bird.type === 1) {
-    res = bird.name
-  } else if (bird.type === 2) {
-    res = bird.name
-  } else if (bird.type === 3) {
-    res = bird.name
-  } else {
-    res = '不确定动物'
+class BridClass {
+  name: string
+  type: number
+  constructor(birdObject: Bird) {
+    this.type = birdObject.type
+    this.name = birdObject.name
   }
-  return res + '的速度'
+
+  get plumage() {
+    let res
+    if (this.type === 1) {
+      res = this.name
+    } else if (this.type === 2) {
+      res = this.name
+    } else if (this.type === 3) {
+      res = this.name
+    } else {
+      res = '不确定动物'
+    }
+    return res + '的羽毛'
+  }
+
+  get airSpeedVelocity() {
+    let res
+    if (this.type === 1) {
+      res = this.name
+    } else if (this.type === 2) {
+      res = this.name
+    } else if (this.type === 3) {
+      res = this.name
+    } else {
+      res = '不确定动物'
+    }
+    return res + '的速度'
+  }
 }
 
-function plumages (birds: Bird[]) {
-  return new Map(birds.map(bird => [bird.name, plumage(bird)]))
+class DaYanClass extends BridClass {
+  name: string
+  constructor(bird: Bird) {
+    super(bird)
+    this.name = bird.name + '1'
+  }
+  get plumage() {
+    return this.name + '的羽毛颜色'
+  }
+
+  get airSpeedVelocity() {
+    return this.name + '的速度'
+  }
 }
 
-function speeds (birds: Bird[]) {
-  return new Map(birds.map(bird => [bird.name, airSpeedVelocity(bird)]))
+class JiaQiaoClass extends BridClass {
+  get plumage() {
+    return this.name + '的羽毛颜色'
+  }
+
+  get airSpeedVelocity() {
+    return this.name + '的速度'
+  }
+}
+
+class YanZiClass extends BridClass {
+  get plumage() {
+    return this.name + '的羽毛颜色'
+  }
+
+  get airSpeedVelocity() {
+    return this.name + '的速度'
+  }
 }
 
 const birds = [
   {
     name: '大雁',
-    type: 1
+    type: 1,
   },
   {
     name: '家雀',
-    type: 2
+    type: 2,
   },
   {
     name: '燕子',
-    type: 3
+    type: 3,
   },
   {
     name: '其他',
-    type: 4
-  }
+    type: 4,
+  },
 ]
 
 const birdPlumages = plumages(birds)
 const birdSpeeds = speeds(birds)
 console.log(birdPlumages, birdSpeeds)
-@Options({
-})
-
-class Home extends Vue {
-}
+@Options({})
+class Home extends Vue {}
 export default Home
 </script>
