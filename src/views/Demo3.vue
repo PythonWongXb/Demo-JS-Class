@@ -78,31 +78,11 @@ class BridClass {
   }
 
   get plumage() {
-    let res
-    if (this.type === 1) {
-      res = this.name
-    } else if (this.type === 2) {
-      res = this.name
-    } else if (this.type === 3) {
-      res = this.name
-    } else {
-      res = '不确定动物'
-    }
-    return res + '的羽毛'
+    return '超类中的默认plumage color'
   }
 
   get airSpeedVelocity() {
-    let res
-    if (this.type === 1) {
-      res = this.name
-    } else if (this.type === 2) {
-      res = this.name
-    } else if (this.type === 3) {
-      res = this.name
-    } else {
-      res = '不确定动物'
-    }
-    return res + '的速度'
+    return '超类中的默认speed'
   }
 }
 
