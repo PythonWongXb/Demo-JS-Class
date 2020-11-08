@@ -24,7 +24,7 @@ import { Options, Vue } from 'vue-class-component'
 // 超类 与 基类
 
 // plumages => 羽毛
-// 目的：我的朋友有一群鸟儿，1. 我们想知道这些鸟飞的多快速，2. 他们的羽毛是什么颜色？
+// 目的：我的朋友有一群鸟儿 => 取决于bird的type 1. 我们想知道这些鸟飞的多快速，2. 他们的羽毛是什么颜色？
 
 interface Bird {
   name: string,
