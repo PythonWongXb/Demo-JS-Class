@@ -32,11 +32,31 @@ interface Bird {
 }
 
 function plumage (bird: Bird) {
-  return new BridClass(bird).plumage
+  let res
+  if (bird.type === 1) {
+    res = bird.name
+  } else if (bird.type === 2) {
+    res = bird.name
+  } else if (bird.type === 3) {
+    res = bird.name
+  } else {
+    res = '不确定动物'
+  }
+  return res + '的羽毛'
 }
 
 function airSpeedVelocity (bird: Bird) {
-  return new BridClass(bird).airSpeedVelocity
+  let res
+  if (bird.type === 1) {
+    res = bird.name
+  } else if (bird.type === 2) {
+    res = bird.name
+  } else if (bird.type === 3) {
+    res = bird.name
+  } else {
+    res = '不确定动物'
+  }
+  return res + '的速度'
 }
 
 function plumages (birds: Bird[]) {
@@ -45,46 +65,6 @@ function plumages (birds: Bird[]) {
 
 function speeds (birds: Bird[]) {
   return new Map(birds.map(bird => [bird.name, airSpeedVelocity(bird)]))
-}
-
-// 有两个不同的操作，其行为都随着鸟的类型而发生变化，
-// 因此可以创建出对应的类，用多态来处理各类型特有的行为。
-
-class BridClass {
-  name: string
-  type: number
-  constructor(birdObject: Bird) {
-    this.type = birdObject.type
-    this.name = birdObject.name
-  }
-
-  get plumage () {
-    let res
-    if (this.type === 1) {
-      res = this.name
-    } else if (this.type === 2) {
-      res = this.name
-    } else if (this.type === 3) {
-      res = this.name
-    } else {
-      res = '不确定动物'
-    }
-    return res + '的羽毛'
-  }
-
-  get airSpeedVelocity () {
-    let res
-    if (this.type === 1) {
-      res = this.name
-    } else if (this.type === 2) {
-      res = this.name
-    } else if (this.type === 3) {
-      res = this.name
-    } else {
-      res = '不确定动物'
-    }
-    return res + '的速度'
-  }
 }
 
 const birds = [
