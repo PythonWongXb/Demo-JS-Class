@@ -24,8 +24,71 @@ import { Options, Vue } from 'vue-class-component'
 // 超类 与 基类
 
 // plumages => 羽毛
-//
+// 目的：我的朋友有一群鸟儿，1. 我们想知道这些鸟飞的多快速，2. 他们的羽毛是什么颜色？
 
+interface Bird {
+  name: string,
+  type: number
+}
+
+function plumage (bird: Bird) {
+  let res
+  if (bird.type === 1) {
+    res = bird.name
+  } else if (bird.type === 2) {
+    res = bird.name
+  } else if (bird.type === 3) {
+    res = bird.name
+  } else {
+    res = '不确定动物'
+  }
+  return res + '的羽毛'
+}
+
+function airSpeedVelocity (bird: Bird) {
+  let res
+  if (bird.type === 1) {
+    res = bird.name
+  } else if (bird.type === 2) {
+    res = bird.name
+  } else if (bird.type === 3) {
+    res = bird.name
+  } else {
+    res = '不确定动物'
+  }
+  return res + '的速度'
+}
+
+function plumages (birds: Bird[]) {
+  return new Map(birds.map(bird => [bird.name, plumage(bird)]))
+}
+
+function speeds (birds: Bird[]) {
+  return new Map(birds.map(bird => [bird.name, airSpeedVelocity(bird)]))
+}
+
+const birds = [
+  {
+    name: '大雁',
+    type: 1
+  },
+  {
+    name: '家雀',
+    type: 2
+  },
+  {
+    name: '燕子',
+    type: 3
+  },
+  {
+    name: '其他',
+    type: 4
+  }
+]
+
+const birdPlumages = plumages(birds)
+const birdSpeeds = speeds(birds)
+console.log(birdPlumages, birdSpeeds)
 @Options({
 })
 
