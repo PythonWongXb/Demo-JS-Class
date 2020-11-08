@@ -40,11 +40,17 @@ function airSpeedVelocity(bird: Bird) {
 }
 
 function plumages(birds: Bird[]) {
-  return new Map(birds.map(bird => createBird(bird)).map(birdObject => [birdObject.name, birdObject.plumage]))
+  return new Map(birds
+                .map(bird => createBird(bird))
+                .map(birdObject => [birdObject.name, birdObject.plumage])
+  )
 }
 
 function speeds(birds: Bird[]) {
-  return new Map(birds.map(bird => createBird(bird)).map(birdObject => [birdObject.name, birdObject.airSpeedVelocity]))
+  return new Map(birds
+                .map(bird => createBird(bird))
+                .map(birdObject => [birdObject.name, birdObject.airSpeedVelocity])
+  )
 }
 
 // 有两个不同的操作，其行为都随着鸟的类型而发生变化，
