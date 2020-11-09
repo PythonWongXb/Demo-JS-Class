@@ -26,17 +26,11 @@ import { Options, Vue } from 'vue-class-component'
 // plumages => 羽毛
 // 目的：我的朋友有一群鸟儿，1. 我们想知道这些鸟飞的多快速，2. 他们的羽毛是什么颜色？
 
+// 课程的目的是：demo => 以多态取代条件表达式
+
 interface Bird {
   name: string
   type: number
-}
-
-function plumage(bird: Bird) {
-  return new BridClass(bird).plumage
-}
-
-function airSpeedVelocity(bird: Bird) {
-  return new BridClass(bird).airSpeedVelocity
 }
 
 function plumages(birds: Bird[]) {
