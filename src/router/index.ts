@@ -1,14 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2020-10-24 16:00:59
- * @LastEditTime: 2020-11-08 14:29:55
+ * @LastEditTime: 2020-11-14 10:45:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-demo/src/router/index.ts
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
-import Demo1 from '../views/Home.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -27,7 +26,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/demo1',
     name: 'demo1',
-    component: Demo1
+    component: Home
   },
   {
     path: '/demo2',
@@ -44,6 +43,30 @@ const routes: Array<RouteRecordRaw> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Demo3.vue')
+  },
+  {
+    path: '/demo4',
+    name: 'demo4',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Demo4.vue')
+  },
+  {
+    path: '/demo5',
+    name: 'demo5',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Demo5.vue')
+  },
+  {
+    path: '/demo6',
+    name: 'demo6',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Demo6.vue')
   }
 ]
 
