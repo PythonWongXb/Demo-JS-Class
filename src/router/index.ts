@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-24 16:00:59
- * @LastEditTime: 2020-11-14 20:00:56
+ * @LastEditTime: 2020-11-18 10:38:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-demo/src/router/index.ts
@@ -59,6 +59,14 @@ const routes: Array<RouteRecordRaw> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Demo5.vue')
+  },
+  {
+    path: '/promise',
+    name: 'promise',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/promise/index.vue')
   }
 ]
 
