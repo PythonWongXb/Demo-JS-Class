@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-08 17:22:17
- * @LastEditTime: 2020-11-14 20:36:06
+ * @LastEditTime: 2020-11-14 21:26:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-demo/.eslintrc.js
@@ -23,6 +23,19 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'space-before-function-paren': 0,
-    'semi': 0
+    'semi': 0,
+    '@typescript-eslint/member-delimiter-style': [
+      0,
+      {
+        multiline: {
+          delimiter: 'none',
+          requireLast: false,
+        },
+        singleline: {
+          delimiter: 'semi',
+          requireLast: false,
+        },
+      },
+    ],
   }
 }
