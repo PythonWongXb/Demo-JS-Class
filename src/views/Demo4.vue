@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-10 22:59:13
- * @LastEditTime: 2020-11-16 08:30:48
+ * @LastEditTime: 2020-11-21 16:42:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-demo/src/views/Demo4.vue
@@ -39,22 +39,41 @@ function hasChina(historyList: History[]): boolean {
 }
 
 function voyageRisk(voyage: Voyage): number {
-  console.log(voyage)
-  return 1
+  let res = 1
+  if (voyage.length < 5) {
+    res += 2
+  } else {
+    res += 4
+  }
+  if (['china', 'east-indies'].includes(voyage.zone)) res += 4
+  return res
 }
 
 function voyageProfitFactor(voyage: Voyage, historyList: History[]): number {
-  if (hasChina(historyList)) {
-    return 2
+  let res = 1
+  if (historyList.length < 5) {
+    res += 2
+  } else {
+    res += 3
   }
-  return 1
+  res += historyList.filter(item => item.profit > 0).length
+  if (voyage.zone === 'china' && hasChina(historyList)) res -= 2
+  return Math.max(res, 0)
 }
 
 function captionHistoryRisk(voyage: Voyage, historyList: History[]): number {
-  if (hasChina(historyList)) {
-    return 2
+  let res = 1
+  if (voyage.zone === 'china') res += 1
+  if (voyage.zone === 'east-indies') res += 1
+  if (voyage.zone === 'china' && hasChina(historyList)) {
+    res += 3
+    if (historyList.length > 3) res += 3
+    if (voyage.length > 3) res += 3
+  } else {
+    if (historyList.length > 8) res += 1
+    if (voyage.length > 8) res += 1
   }
-  return 1
+  return res
 }
 
 const voyage = {
