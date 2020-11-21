@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-10 22:59:13
- * @LastEditTime: 2020-11-21 16:42:10
+ * @LastEditTime: 2020-11-21 17:59:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-demo/src/views/Demo4.vue
@@ -22,6 +22,7 @@ import { Options, Vue } from 'vue-class-component'
  * 掌握一个技能，本领 => 5w1h => (1.what 2. why 3. how) => 4.when => 5.who
  * teach you a demo, just that.
  * really learned => really know this demo. => know everything, every details in the demo.
+ * title 补全复杂的逻辑与第二次重构
  */
 
 interface Voyage {
@@ -99,6 +100,7 @@ const historyList = [
     profit: 9
   }
 ]
+
 function _getProfitFactorRisk(vpf: number): number {
   return vpf * 3
 }

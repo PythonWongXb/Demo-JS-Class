@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-21 16:52:34
- * @LastEditTime: 2020-11-21 17:21:39
+ * @LastEditTime: 2020-11-21 18:04:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-demo/src/views/demo6.vue
@@ -22,13 +22,12 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-
 /**
- * 主题：第二季：以多态取代条件表达式
+ * 主题：第二季 以多态取代条件表达式
  * 目的2：你有一家评测机构，要对远洋船的航行进行投资的等级评估
  * 评估的时候既要考虑航程本身的特征（1. 去哪儿，2.多远 3.risk, 也要考虑船长航行的历史（1.他去过那些地方，2.成果如何, 然后给你投资评估等级 A或者B
  * 掌握一个技能，本领 => 5w1h => (1.what 2. why 3. how) => 4.when => 5.who
- * teach you a demo, just that.
+ * teach you a demo,just that.
  * really learned => really know this demo. => know everything, every details in the demo.
  */
 
@@ -90,6 +89,15 @@ class Rate {
     }
     return res
   }
+  // 对象 => 实例对象 => 函数对象或者说方法对象 prototype Promise.prototype.then Promise.all Promise.race
+
+  get rating() {
+    const vpf = this.voyageProfitFactor
+    const vr = this.voyageRisk
+    const chr = this.captionHistoryRisk
+    const isLevelA = Rate._getLevel(vpf, vr, chr)
+    return isLevelA ? 'A' : 'B'
+  }
 
   static _getProfitFactorRisk(vpf: number): number {
     return vpf * 3
@@ -103,14 +111,6 @@ class Rate {
     const profitFactorRisk = Rate._getProfitFactorRisk(vpf)
     const captionFactorRisk = Rate._getCaptionFactorRisk(vr, chr)
     return profitFactorRisk < captionFactorRisk ? 'A' : 'B'
-  }
-
-  get rating() {
-    const vpf = this.voyageProfitFactor
-    const vr = this.voyageRisk
-    const chr = this.captionHistoryRisk
-    const isLevelA = Rate._getLevel(vpf, vr, chr)
-    return isLevelA ? 'A' : 'B'
   }
 }
 
