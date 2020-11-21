@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-21 16:52:34
- * @LastEditTime: 2020-11-21 18:04:45
+ * @LastEditTime: 2020-11-21 22:02:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-demo/src/views/demo6.vue
@@ -71,22 +71,21 @@ class Rate {
       res += 3
     }
     res += this.historyList.filter(item => item.profit > 0).length
-    if (this.voyage.zone === 'china' && this.hasChina) res -= 2
     return Math.max(res, 0)
+  }
+
+  get (): number {
+    let res = 0
+    if (this.historyList.length > 8) res += 1
+    if (this.voyage.length > 8) res += 1
+    return resvoyageAndHistoryLengthFactor
   }
 
   get captionHistoryRisk(): number {
     let res = 1
     if (this.voyage.zone === 'china') res += 1
     if (this.voyage.zone === 'east-indies') res += 1
-    if (this.voyage.zone === 'china' && this.hasChina) {
-      res += 3
-      if (this.historyList.length > 3) res += 3
-      if (this.voyage.length > 3) res += 3
-    } else {
-      if (this.historyList.length > 8) res += 1
-      if (this.voyage.length > 8) res += 1
-    }
+    res += this.voyageAndHistoryLengthFactor
     return res
   }
   // 对象 => 实例对象 => 函数对象或者说方法对象 prototype Promise.prototype.then Promise.all Promise.race
@@ -114,6 +113,21 @@ class Rate {
   }
 }
 
+class ExperienceChinaRate extends Rate {
+  get voyageAndHistoryLengthFactor(): number {
+    let res = 0
+    res += 3
+    if (this.historyList.length > 3) res += 3
+    if (this.voyage.length > 3) res += 3
+    return res
+  }
+
+  get voyageProfitFactor(): number {
+    const res = super.voyageProfitFactor - 2
+    return Math.max(res, 0)
+  }
+}
+
 const voyage = {
   zone: 'west-indies',
   length: 10
@@ -138,7 +152,19 @@ const historyList = [
   }
 ]
 
-const myRating = new Rate(voyage, historyList)
+function createRate(voyage: Voyage, historyList: History[]) {
+  function hasChina(historyList: History[]): boolean {
+    return historyList.some(item => item.zone === 'china')
+  }
+
+  if (voyage.zone === 'china' && hasChina(historyList)) {
+    return new ExperienceChinaRate(voyage, historyList)
+  } else {
+    return new Rate(voyage, historyList)
+  }
+}
+
+const myRating = createRate(voyage, historyList)
 console.log(myRating.rating)
 
 @Options({})
