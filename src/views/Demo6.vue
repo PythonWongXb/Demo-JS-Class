@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-21 16:52:34
- * @LastEditTime: 2020-11-21 22:02:21
+ * @LastEditTime: 2020-11-21 22:03:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-demo/src/views/demo6.vue
@@ -74,11 +74,11 @@ class Rate {
     return Math.max(res, 0)
   }
 
-  get (): number {
+  get voyageAndHistoryLengthFactor(): number {
     let res = 0
     if (this.historyList.length > 8) res += 1
     if (this.voyage.length > 8) res += 1
-    return resvoyageAndHistoryLengthFactor
+    return res
   }
 
   get captionHistoryRisk(): number {
