@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-18 10:32:33
- * @LastEditTime: 2020-11-18 10:57:01
+ * @LastEditTime: 2020-11-20 23:03:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-demo/src/views/promise/index.vue
@@ -19,34 +19,59 @@
 <script>
 import { Vue, Options } from 'vue-class-component'
 
+// 工厂函数与Promise化封装
+
 function _promisify(func) {
   if (typeof func !== 'function') return func
-  return (args = {}) =>
-    new Promise((resolve, reject) => {
+  return (params = {}) => {
+    return new Promise((resolve, reject) => {
       func(
-        args
+        Object.assign(
+          params,
+          {
+            success: resolve,
+            fail: reject
+          }
+        )
       )
-      resolve(1)
-    })
+    }
+    )
+  }
 }
 
-function getNumber({ number }) {
+function getNumber({ number = 1, success = (name = 1) => name, fail = (name) => name }) {
+  if (number > 1) {
+    success(number)
+  } else {
+    fail(number)
+  }
   return number
 }
 
 @Options({
   mounted() {
-    this.demo()
+    // this.demo()
+    this.test()
   }
 })
 
 class PromiseClass extends Vue {
   demo() {
-    console.log('yes')
     _promisify(getNumber)({ number: 5 })
       .then(res => {
         console.log(res)
       })
+  }
+
+  test() {
+    const func = _promisify(getNumber)({
+      number: 5
+    })
+    console.log(func.then(res => {
+      console.log(res)
+      return Promise.resolve(res)
+    }
+    ))
   }
 }
 
