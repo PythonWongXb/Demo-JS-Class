@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-21 16:52:34
- * @LastEditTime: 2020-11-21 22:03:23
+ * @LastEditTime: 2020-11-21 22:34:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-demo/src/views/demo6.vue
@@ -29,6 +29,12 @@ import { Options, Vue } from 'vue-class-component'
  * 掌握一个技能，本领 => 5w1h => (1.what 2. why 3. how) => 4.when => 5.who
  * teach you a demo,just that.
  * really learned => really know this demo. => know everything, every details in the demo.
+ * 可扩展性高、可维护性高、可读性高、耦合性低 => 诗一样的代码 => 我是一个诗人
+ * I want to tell you something I think is useful to you:
+ * I am a poet, I write down codes that are like poems,
+ * And you, one of my student (because you had learn my lesson), you must write down codes like poems.
+ * If you can't do this, please you never say to anynone that you were my student. It will be a shame for me.
+ * thanks for watching, everyone, good luck to you!
  */
 
 interface Voyage {
@@ -74,10 +80,15 @@ class Rate {
     return Math.max(res, 0)
   }
 
-  get voyageAndHistoryLengthFactor(): number {
+  get voyageFactor(): number {
+    let res = 0
+    if (this.voyage.length > 8) res += 1
+    return res
+  }
+
+  get historyListLengthFactor(): number {
     let res = 0
     if (this.historyList.length > 8) res += 1
-    if (this.voyage.length > 8) res += 1
     return res
   }
 
@@ -85,7 +96,8 @@ class Rate {
     let res = 1
     if (this.voyage.zone === 'china') res += 1
     if (this.voyage.zone === 'east-indies') res += 1
-    res += this.voyageAndHistoryLengthFactor
+    res += this.historyListLengthFactor
+    res += this.voyageFactor
     return res
   }
   // 对象 => 实例对象 => 函数对象或者说方法对象 prototype Promise.prototype.then Promise.all Promise.race
@@ -114,11 +126,19 @@ class Rate {
 }
 
 class ExperienceChinaRate extends Rate {
-  get voyageAndHistoryLengthFactor(): number {
+  get captionHistoryRisk() {
+    return super.captionHistoryRisk + 3
+  }
+
+  get voyageFactor(): number {
     let res = 0
-    res += 3
-    if (this.historyList.length > 3) res += 3
     if (this.voyage.length > 3) res += 3
+    return res
+  }
+
+  get historyListLengthFactor(): number {
+    let res = 0
+    if (this.historyList.length > 3) res += 3
     return res
   }
 
